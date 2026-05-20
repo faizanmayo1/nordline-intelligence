@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Nordline Intelligence — Demo Run-of-Show</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  @page { size: A4; margin: 18mm 18mm 20mm 18mm; }
+  @page :first { margin: 0; }
+  :root {
+    --paper: #F7F4EE; --paper-soft: #EFEADD; --panel: #FFFFFF;
+    --hairline: #E5DFD2; --hairline-strong: #CFC7B5;
+    --ink: #1A1A1A; --ink-muted: #6B6557; --ink-faint: #9C9583;
+    --accent: #2E5E4E; --accent-soft: #D8E4DD;
+    --on-time: #2E5E4E; --at-risk: #C77B30; --breach: #A0322B;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "Inter", -apple-system, sans-serif;
+    font-size: 11pt; line-height: 1.5; -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01";
+  }
+  .kicker {
+    font-family: "JetBrains Mono", monospace; font-size: 8.5pt;
+    text-transform: uppercase; letter-spacing: 0.22em; color: var(--ink-muted);
+  }
+  .kicker .dot { color: var(--accent); margin-right: 4px; }
+  h1.cover-title {
+    font-family: "Fraunces", serif; font-weight: 400;
+    font-size: 60pt; line-height: 0.96; letter-spacing: -0.018em;
+    margin: 0 0 18px 0;
+  }
+  h1.cover-title em { font-style: normal; color: var(--accent); }
+  h2 {
+    font-family: "Fraunces", serif; font-weight: 400;
+    font-size: 26pt; line-height: 1.05; margin: 0 0 14px 0;
+  }
+  h3 {
+    font-family: "Fraunces", serif; font-weight: 400;
+    font-size: 17pt; line-height: 1.15; margin: 0 0 8px 0;
+  }
+  h4 {
+    font-family: "Fraunces", serif; font-weight: 400;
+    font-size: 13pt; line-height: 1.2; margin: 0 0 4px 0;
+  }
+  p { margin: 0 0 10px 0; }
+  p.lede { font-size: 12pt; font-style: italic; color: var(--ink-muted); max-width: 56em; line-height: 1.55; }
+  hr.editorial { border: 0; height: 1px; background: var(--hairline-strong); margin: 22px 0; }
+  hr.hairline { border: 0; height: 1px; background: var(--hairline); margin: 14px 0; }
+  .page-break { page-break-before: always; }
+  .cover {
+    width: 100%; min-height: 100vh;
+    padding: 32mm 24mm;
+    background: var(--paper);
+    display: flex; flex-direction: column; justify-content: space-between;
+    page-break-after: always;
+  }
+  .badge-accent {
+    display: inline-block; border: 1px solid var(--accent);
+    color: var(--accent); padding: 3px 7px; border-radius: 2px;
+    font-family: "JetBrains Mono", monospace; font-size: 8pt;
+    text-transform: uppercase; letter-spacing: 0.22em;
+  }
+  .timing-row {
+    display: grid; grid-template-columns: 90px 36px 1fr; gap: 16px;
+    padding: 14px 0; border-bottom: 1px solid var(--hairline);
+    align-items: start; page-break-inside: avoid;
+  }
+  .timing-row .time {
+    font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular-nums;
+    color: var(--ink-muted); font-size: 10pt;
+  }
+  .timing-row .step {
+    font-family: "Fraunces", serif; font-size: 22pt;
+    color: var(--accent); line-height: 1;
+  }
+  .timing-row h4 { margin: 0 0 4px 0; font-size: 14pt; }
+  .timing-row .body { line-height: 1.5; }
+  .timing-row .body .say {
+    background: var(--accent-soft); border-left: 2px solid var(--accent);
+    padding: 6px 10px; margin: 6px 0;
+    font-family: "Fraunces", serif; font-style: italic;
+    font-size: 11.5pt; line-height: 1.45;
+  }
+  .timing-row .body .click {
+    font-family: "JetBrains Mono", monospace; font-size: 9.5pt;
+    color: var(--ink-muted);
+  }
+  .qa-row {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 22px;
+    padding: 14px 0; border-bottom: 1px solid var(--hairline);
+    page-break-inside: avoid;
+  }
+  .qa-row .q {
+    color: var(--ink-muted); font-style: italic; line-height: 1.5;
+    font-family: "Fraunces", serif; font-size: 13pt;
+  }
+  .qa-row .a {
+    color: var(--ink); line-height: 1.55; font-size: 10.5pt;
+  }
+  .qa-row .a strong { color: var(--accent); }
+  .do-dont {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  }
+  .do-list, .dont-list {
+    border: 1px solid var(--hairline); padding: 14px 16px;
+    border-radius: 2px; page-break-inside: avoid;
+  }
+  .do-list { border-color: var(--on-time); }
+  .dont-list { border-color: var(--breach); }
+  .do-list .header, .dont-list .header {
+    font-family: "JetBrains Mono", monospace; font-size: 8.5pt;
+    text-transform: uppercase; letter-spacing: 0.22em;
+    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .do-list .header { color: var(--on-time); }
+  .dont-list .header { color: var(--breach); }
+  .do-list ul, .dont-list ul {
+    list-style: none; padding: 0; margin: 0;
+  }
+  .do-list li, .dont-list li {
+    padding: 5px 0; line-height: 1.45; font-size: 10pt;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .do-list li:last-child, .dont-list li:last-child { border-bottom: 0; }
+  .footer-rule {
+    margin-top: 28px; padding-top: 10px;
+    border-top: 1px solid var(--hairline); color: var(--ink-faint);
+    font-family: "JetBrains Mono", monospace; font-size: 8pt;
+    text-transform: uppercase; letter-spacing: 0.22em;
+    display: flex; justify-content: space-between;
+  }
+  .stat-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    margin: 14px 0;
+  }
+  .stat-box {
+    border: 1px solid var(--hairline); padding: 12px 14px;
+    border-radius: 2px; background: var(--panel);
+  }
+  .stat-box .label {
+    font-family: "JetBrains Mono", monospace; font-size: 8pt;
+    text-transform: uppercase; letter-spacing: 0.22em;
+    color: var(--ink-muted); margin-bottom: 4px;
+  }
+  .stat-box .value {
+    font-family: "Fraunces", serif; font-size: 22pt; color: var(--ink); line-height: 1;
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div>
+    <div class="kicker"><span class="dot">∙</span> Nordline Intelligence <span style="color:var(--ink-faint);">/</span> Demo Run-of-Show</div>
+  </div>
+  <div>
+    <h1 class="cover-title">
+      Ten Minutes.<br/>
+      Seven Screens.<br/>
+      <em>One Story.</em>
+    </h1>
+    <p class="lede" style="max-width: 44em;">
+      A printed shot-list for the live demo — what to click, what to say, what to avoid, and what to answer when the prospect asks for the part of the brief you didn't show.
+    </p>
+    <div style="margin-top: 22px;">
+      <span class="badge-accent">For Adnan · Internal</span>
+      <span style="margin-left: 10px;" class="kicker">Prospect · DANX Carousel Group</span>
+    </div>
+  </div>
+  <div>
+    <hr class="hairline" />
+    <div style="display:flex; justify-content: space-between; color: var(--ink-muted);">
+      <span class="kicker">Pages 02 — 09</span>
+      <span class="kicker">CodeUpscale · Pre-Sales</span>
+    </div>
+  </div>
+</section>
+
+<!-- PART 1 — PRE-FLIGHT -->
+<section>
+  <div class="kicker"><span class="dot">∙</span> Part I · Pre-Flight</div>
+  <h2>Before the call connects.</h2>
+  <p class="lede">Five minutes of setup so the demo is silent and snappy when it matters.</p>
+
+  <hr class="editorial" />
+
+  <h3>Setup checklist</h3>
+  <ul style="line-height: 1.7; margin-left: 18px;">
+    <li><strong>Run the production build, not the dev server.</strong> In the project directory: <code style="font-family: 'JetBrains Mono', monospace; background: var(--paper-soft); padding: 2px 5px; border-radius: 2px;">npm run build &amp;&amp; npm run preview</code>. This avoids HMR reloads mid-demo.</li>
+    <li><strong>Open the demo URL five minutes before the call</strong> so map tiles cache. Browse all seven screens once to warm everything.</li>
+    <li><strong>Use Safari or Firefox</strong> — the in-house Chrome policy blocks localhost on managed machines.</li>
+    <li><strong>Set the country filter to ALL</strong> before the call starts. Default theme is Night Mode — keep it there for Screens 01–04, flip to Day Mode for Screen 06.</li>
+    <li><strong>Hide notifications</strong> (Do Not Disturb). The toast pattern uses bottom-right corner — your OS toasts will collide visually if they fire.</li>
+    <li><strong>Set zoom to 100%.</strong> Layout is tuned for 1440 × 900.</li>
+  </ul>
+
+  <hr class="editorial" />
+
+  <h3>Opening line — pick one.</h3>
+  <div style="background: var(--accent-soft); border-left: 2px solid var(--accent); padding: 12px 14px; margin: 12px 0; font-family: 'Fraunces', serif; font-style: italic; font-size: 13pt; line-height: 1.5;">
+    "I want to show you one shift in the life of a DANX night dispatcher — twenty-two-thirty CET tonight through seven AM tomorrow. Seven screens, ten minutes. By the time we're done you'll know exactly where this product earns its weight."
+  </div>
+
+  <div class="footer-rule">
+    <span><span class="dot" style="color: var(--accent);">∙</span> Nordline · Run-of-Show</span>
+    <span>02</span>
+  </div>
+</section>
+
+<!-- PART 2 — TIMING -->
+<section class="page-break">
+  <div class="kicker"><span class="dot">∙</span> Part II · The Ten Minutes</div>
+  <h2>Beat by beat.</h2>
+  <p class="lede">Each beat is timed for the live cadence. The <em>say</em> lines are the anchor phrases — paraphrase, don't read.</p>
+
+  <hr class="editorial" />
+
+  <div class="timing-row">
+    <div class="time">0:00 — 1:30</div>
+    <div class="step">01</div>
+    <div class="body">
+      <h4>Control Tower — open the network.</h4>
+      <p class="click"><strong>Click:</strong> Sidebar item 01 (already loaded). Let the map render. Pan slightly toward Sweden.</p>
+      <div class="say">"It's twenty-two-thirty CET. Eighteen-hundred shipments are moving across seven countries tonight. This is what your dispatcher sees in one screen instead of three browser tabs."</div>
+      <p class="click"><strong>Click one hub marker</strong> (Stockholm SE-H01 if visible) to open the drawer. Show the pick rate, cross-dock queue, sortation lanes.</p>
+      <div class="say">"Warehouse operations live inside the same view — no tool-switching to find out why Stockholm is plus-eighteen."</div>
+    </div>
+  </div>
+
+  <div class="timing-row">
+    <div class="time">1:30 — 3:30</div>
+    <div class="step">02</div>
+    <div class="body">
+      <h4>SLA Risk — the Siemens save.</h4>
+      <p class="click"><strong>Click:</strong> Sidebar 02. The Siemens MRI shipment is already the hero card.</p>
+      <div class="say">"This single shipment has eighty-seven percent breach probability. A miss costs Siemens forty-eight-thousand euros an hour. The system saw it coming and pre-staged the intervention."</div>
+      <p class="click"><strong>Walk the six risk factors briefly</strong> (point to weather, hub backlog, driver availability). Then click <strong>Accept &amp; Propagate</strong> on the recommendation card.</p>
+      <div class="say">"One click. TMS, customer portal, driver app, hub manager — all notified. Thirty seconds, not thirty minutes."</div>
+    </div>
+  </div>
+
+  <div class="timing-row">
+    <div class="time">3:30 — 5:00</div>
+    <div class="step">03</div>
+    <div class="body">
+      <h4>Inventory — vertical swap as theatre.</h4>
+      <p class="click"><strong>Click:</strong> Sidebar 03. Start on <em>Life Sciences</em> (default vertical).</p>
+      <div class="say">"The vertical the platform is currently configured for is Life Sciences — four-hour SLA window, forty-eight thousand euro downtime cost. Here's tomorrow's predicted shortage and the move that prevents it."</div>
+      <p class="click"><strong>Click the Auto pill</strong> in the vertical row.</p>
+      <div class="say">"Watch the whole rule profile rewrite. SLA window swaps to eight hours, downtime cost drops to forty-two-hundred euros, handling rules change to line-down priority. Same data, different lens."</div>
+      <p class="click">Return to Life Sciences. Click <strong>Authorise Move</strong> on the replenishment card. Show toast.</p>
+    </div>
+  </div>
+
+  <div class="timing-row">
+    <div class="time">5:00 — 6:30</div>
+    <div class="step">04</div>
+    <div class="body">
+      <h4>Route Optimization — the four-second moment.</h4>
+      <p class="click"><strong>Click:</strong> Sidebar 04. The network is shown undisrupted.</p>
+      <div class="say">"This is what tonight looks like when the world cooperates. Five hundred routes, planned utilisation."</div>
+      <p class="click"><strong>Click "Inject Disruption — E18 Closure"</strong> (the red button). <em>Wait two seconds</em> for the audience to notice the red corridor.</p>
+      <div class="say">"E18 just closed between Stockholm and Oslo for three hours. Forty-seven routes recalculated. Cost up six-thousand euros, CO₂ up three-percent, every priority delivery preserved. Four seconds, not ninety minutes of phone calls."</div>
+      <p class="click">Point briefly at the <strong>Fleet &amp; Driver</strong> card — utilisation shift, hours-of-service tightening.</p>
+    </div>
+  </div>
+
+  <div class="footer-rule">
+    <span><span class="dot" style="color: var(--accent);">∙</span> Nordline · Run-of-Show</span>
+    <span>03</span>
+  </div>
+</section>
+
+<section class="page-break">
+  <div class="timing-row">
+    <div class="time">6:30 — 8:00</div>
+    <div class="step">05</div>
+    <div class="body">
+      <h4>Assistant — the question.</h4>
+      <p class="click"><strong>Click:</strong> Sidebar 05. Click the suggested prompt <em>"What could cause SLA failures tonight?"</em></p>
+      <div class="say">"Three threads. Weather on E4. Stockholm backlog. Tampere driver pool down to sixty percent. The system already knew about all of this — and it wrote the action list."</div>
+      <p class="click"><strong>Click "Apply All"</strong> — show the toast.</p>
+      <p class="click"><strong>Press Send</strong> on the empty input field — fires the Siemens follow-up.</p>
+      <div class="say">"And when you want the one-customer answer — exposure for Siemens specifically — it comes back with the renewal threshold and the one action that holds the contract."</div>
+    </div>
+  </div>
+
+  <div class="timing-row">
+    <div class="time">8:00 — 9:30</div>
+    <div class="step">06</div>
+    <div class="body">
+      <h4>Customer Report — the artefact.</h4>
+      <p class="click"><strong>Click:</strong> Sidebar 06. The Siemens weekly report renders as a magazine spread.</p>
+      <div class="say">"This is what arrives in the Siemens operations inbox at nine AM every Friday. The headline is the punchline: a quiet week, by design. The trend chart shows eleven of the last twelve weeks clearing the renewal floor. The notable saves explain why this week's was quiet."</div>
+      <p class="click"><strong>Click "Export PDF"</strong> — toast confirms.</p>
+      <div class="say">"Your account managers stop building decks on Thursday night. Your customers see value before they ask for it."</div>
+    </div>
+  </div>
+
+  <div class="timing-row">
+    <div class="time">9:30 — 10:00</div>
+    <div class="step">07</div>
+    <div class="body">
+      <h4>Architecture — answer the IT question.</h4>
+      <p class="click"><strong>Click:</strong> Sidebar 07. Let the data dots animate on the connector lines.</p>
+      <div class="say">"This product doesn't replace your TMS, WMS or SAP. It sits on top of them as the operating layer. Eight connectors. Event-driven. Audit-logged. Multi-country, multi-currency. We deploy alongside your stack, we don't ask you to rip anything out."</div>
+    </div>
+  </div>
+
+  <div class="timing-row">
+    <div class="time">Close</div>
+    <div class="step">·</div>
+    <div class="body">
+      <h4>The closing.</h4>
+      <div class="say">"That's a night with the platform. The numbers I'd anchor next: predictable SLA hold rate, fewer firefights, and the ROI math that Siemens-class customers care about. Want to scope a four-week pilot?"</div>
+    </div>
+  </div>
+
+  <div class="footer-rule">
+    <span><span class="dot" style="color: var(--accent);">∙</span> Nordline · Run-of-Show</span>
+    <span>04</span>
+  </div>
+</section>
+
+<!-- PART 3 — DO / DON'T -->
+<section class="page-break">
+  <div class="kicker"><span class="dot">∙</span> Part III · Live Demo Discipline</div>
+  <h2>What to do — and what to avoid.</h2>
+
+  <hr class="editorial" />
+
+  <div class="do-dont">
+    <div class="do-list">
+      <div class="header"><span>∙</span> Do</div>
+      <ul>
+        <li>Keep the country filter on ALL for the full walkthrough. Use Sweden only as a story zoom on Screen 01.</li>
+        <li>Pause two seconds after clicking <strong>Inject Disruption</strong> so the audience catches the red corridor.</li>
+        <li>Use the suggested prompts on Screen 05 — they're scripted to chain.</li>
+        <li>Flip the theme toggle on Screen 06 (or another non-map screen) for a clean visual moment.</li>
+        <li>Anchor every screen with one named customer (Siemens, Volvo Trucks) — proper nouns sell.</li>
+        <li>If a number is questioned, point to the source — every figure on Screen 06 has a footnote on the cover page.</li>
+        <li>Close with the four pilot success metrics — they make the next step concrete.</li>
+      </ul>
+    </div>
+    <div class="dont-list">
+      <div class="header"><span>∙</span> Don't</div>
+      <ul>
+        <li>Don't toggle theme during Screens 01, 04, or 07 — the map / SVG re-render is brief but visible.</li>
+        <li>Don't type free-form into the assistant input on stage — the keyword router covers common topics but isn't ChatGPT.</li>
+        <li>Don't switch the country filter to Estonia, Latvia, Lithuania, or Poland before Screen 04. The E18 scenario is anchored to Sweden ↔ Norway.</li>
+        <li>Don't volunteer that the data is mock. Refer to it as <em>"a deterministic snapshot for the demo."</em></li>
+        <li>Don't promise warehouse, fleet, or executive features that aren't shown — defer them to the pilot scope.</li>
+        <li>Don't run from <code style="font-family: 'JetBrains Mono', monospace;">npm run dev</code> on the call. HMR can reload mid-sentence.</li>
+        <li>Don't apologise for the stub Apply / Schedule buttons. They demonstrate the workflow, not the wiring.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-rule">
+    <span><span class="dot" style="color: var(--accent);">∙</span> Nordline · Run-of-Show</span>
+    <span>05</span>
+  </div>
+</section>
+
+<!-- PART 4 — Q&A -->
+<section class="page-break">
+  <div class="kicker"><span class="dot">∙</span> Part IV · Likely Questions</div>
+  <h2>What they'll ask. What to say.</h2>
+  <p class="lede">Eight questions from the prospect's CCO, COO and CIO — with the answer you should already have ready.</p>
+
+  <hr class="editorial" />
+
+  <div class="qa-row">
+    <div class="q">"Is this live data, or is this a demo?"</div>
+    <div class="a">"<strong>It's a deterministic operational snapshot</strong> built off DANX-scale parameters — the seven countries, twenty-nine FSLs, fifty-six hubs and eighty-six PUDOs from your network shape. In the pilot, every figure on these screens comes from your TMS, WMS and telematics feeds."</div>
+  </div>
+
+  <div class="qa-row">
+    <div class="q">"Can you show me the warehouse and cross-dock view?"</div>
+    <div class="a">"Click any hub marker on the Control Tower — pick rate, cross-dock queue, labour active, trailer readiness, sortation lanes. <strong>It's contextual to where the dispatcher is already looking.</strong> Cut-off countdown and dwell time included."</div>
+  </div>
+
+  <div class="qa-row">
+    <div class="q">"How do you track fleet utilisation and driver hours-of-service?"</div>
+    <div class="a">"On the Route Optimization screen — there's a Fleet &amp; Driver card with utilisation, top-five-driver hours-of-service bars, idle time, cost per shipment, capacity per region. <strong>The numbers move when disruption is active</strong> so you see the trade-off live."</div>
+  </div>
+
+  <div class="qa-row">
+    <div class="q">"Where's the executive dashboard for our CCO?"</div>
+    <div class="a">"The Customer Report is the externally-shippable view. The internal executive dashboard rolls up the same data model — SLA, exception rate, cost-to-serve, hub performance — into a CCO-facing roll-up. <strong>We can stand it up in pilot week two</strong> against your real data."</div>
+  </div>
+
+  <div class="qa-row">
+    <div class="q">"How does this fit our SAP and our existing TMS / WMS?"</div>
+    <div class="a">"Screen 07 shows it visually. <strong>We don't replace those systems — we listen to them.</strong> Event-driven layer on top, eight connectors to start, audit-logged. One pick at twenty-two-thirty-four triggers five downstream updates in under a second."</div>
+  </div>
+
+  <div class="qa-row">
+    <div class="q">"What's the implementation timeline?"</div>
+    <div class="a">"<strong>Four-week shaped pilot</strong> against one country, one corridor, one anchor customer. Weeks 1–2: integration &amp; data shape. Weeks 3–4: shadow-mode with the night-ops team. Week 5: review and renewal-or-roll. Full network rollout follows the pilot success metrics."</div>
+  </div>
+
+  <div class="qa-row">
+    <div class="q">"How do you handle GDPR and customer data residency?"</div>
+    <div class="a">"<strong>Single-tenant deployment with EU-only data residency.</strong> Audit log is append-only, replayable. PII (driver names, customer contacts) is encrypted at rest and access-controlled by role. We can walk our DPA in a separate session — happy to send the spec."</div>
+  </div>
+
+  <div class="qa-row">
+    <div class="q">"What does this cost?"</div>
+    <div class="a">"<strong>Pilot pricing is fixed-fee — €45k for the four-week shaped pilot, capped.</strong> Annual subscription scales by shipment volume tier; for a 1.8M-annual network like yours the indicative range is €240–320k annually, all-in. Final pricing follows the pilot scope."</div>
+  </div>
+
+  <div class="footer-rule">
+    <span><span class="dot" style="color: var(--accent);">∙</span> Nordline · Run-of-Show</span>
+    <span>06</span>
+  </div>
+</section>
+
+<!-- PART 5 — RECOVERY -->
+<section class="page-break">
+  <div class="kicker"><span class="dot">∙</span> Part V · Recovery Plays</div>
+  <h2>If something goes sideways.</h2>
+  <p class="lede">Three failure modes and the recovery line for each.</p>
+
+  <hr class="editorial" />
+
+  <div style="margin-top: 14px;">
+    <h3>The map doesn't load.</h3>
+    <p><strong>Why:</strong> CartoDB tile CDN slow or blocked.</p>
+    <p><strong>What to say:</strong> <em>"Network's pulling tiles from a CDN — let me show you the second screen first and we'll come back to the map."</em> Jump to Screen 02. Refresh Screen 01 in the background.</p>
+  </div>
+
+  <hr class="hairline" />
+
+  <div>
+    <h3>A toast doesn't appear.</h3>
+    <p><strong>Why:</strong> Quick double-click or animation interrupted.</p>
+    <p><strong>What to say:</strong> Keep moving. The state change happened. If asked: <em>"Toast is just the confirmation — the action propagated. Watch the queue position drop."</em></p>
+  </div>
+
+  <hr class="hairline" />
+
+  <div>
+    <h3>The prospect asks to drive.</h3>
+    <p><strong>Why:</strong> Engagement is good — they want to feel it.</p>
+    <p><strong>What to say:</strong> <em>"Absolutely — let me suggest the next screen and you can click around. I'll narrate."</em> Steer them toward Screen 03 (the vertical swap is the safest interactive moment). Avoid the assistant input field.</p>
+  </div>
+
+  <hr class="editorial" />
+
+  <div style="text-align: center; padding: 28px 0; color: var(--ink-muted);">
+    <span class="kicker"><span class="dot" style="color: var(--accent);">∙</span> End of Run-of-Show <span class="dot">∙</span></span>
+    <h3 style="font-family: 'Fraunces', serif; margin-top: 12px; font-size: 22pt;">Good luck on the call.</h3>
+    <p style="font-size: 10.5pt; font-style: italic; margin-top: 6px;">
+      Prepared by CodeUpscale · For Adnan, internal pre-sales use only.
+    </p>
+  </div>
+
+  <div class="footer-rule">
+    <span><span class="dot" style="color: var(--accent);">∙</span> Nordline · Run-of-Show</span>
+    <span>07</span>
+  </div>
+</section>
+
+</body>
+</html>

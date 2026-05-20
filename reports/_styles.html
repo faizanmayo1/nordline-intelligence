@@ -1,0 +1,367 @@
+<!-- Shared styles snippet used by both reports -->
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 18mm 20mm 18mm;
+  }
+  @page :first {
+    margin: 0;
+  }
+  :root {
+    --paper: #F7F4EE;
+    --paper-soft: #EFEADD;
+    --panel: #FFFFFF;
+    --hairline: #E5DFD2;
+    --hairline-strong: #CFC7B5;
+    --ink: #1A1A1A;
+    --ink-muted: #6B6557;
+    --ink-faint: #9C9583;
+    --accent: #2E5E4E;
+    --accent-soft: #D8E4DD;
+    --on-time: #2E5E4E;
+    --at-risk: #C77B30;
+    --breach: #A0322B;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01";
+  }
+  .serif {
+    font-family: "Fraunces", "Times New Roman", Georgia, serif;
+    font-feature-settings: "ss01";
+    font-optical-sizing: auto;
+  }
+  .mono {
+    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  .kicker {
+    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ink-muted);
+  }
+  .kicker .dot { color: var(--accent); }
+  h1.cover-title {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: 56pt;
+    line-height: 0.96;
+    letter-spacing: -0.018em;
+    margin: 0 0 18px 0;
+    color: var(--ink);
+  }
+  h1.cover-title em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: 26pt;
+    line-height: 1.05;
+    letter-spacing: -0.012em;
+    margin: 0 0 12px 0;
+    color: var(--ink);
+  }
+  h3 {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: 16pt;
+    line-height: 1.15;
+    margin: 0 0 8px 0;
+    color: var(--ink);
+  }
+  h4 {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: 13pt;
+    line-height: 1.2;
+    margin: 0 0 6px 0;
+    color: var(--ink);
+  }
+  p { margin: 0 0 10px 0; }
+  p.lede {
+    font-size: 12pt;
+    line-height: 1.55;
+    font-style: italic;
+    color: var(--ink-muted);
+    max-width: 56em;
+  }
+  hr.editorial {
+    border: 0;
+    height: 1px;
+    background: var(--hairline-strong);
+    margin: 22px 0;
+  }
+  hr.hairline {
+    border: 0;
+    height: 1px;
+    background: var(--hairline);
+    margin: 14px 0;
+  }
+  .page-break {
+    page-break-before: always;
+  }
+  .cover {
+    width: 100%;
+    min-height: 100vh;
+    padding: 32mm 24mm;
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    page-break-after: always;
+  }
+  .cover-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .badge-accent {
+    display: inline-block;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+    padding: 3px 7px;
+    border-radius: 2px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .pain-card {
+    border: 1px solid var(--hairline);
+    background: var(--panel);
+    padding: 14px 16px;
+    border-radius: 2px;
+  }
+  .pain-card .pain-no {
+    font-family: "Fraunces", serif;
+    font-size: 26pt;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .screen-block {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 18px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .screen-block:last-child { border-bottom: 0; }
+  .screen-no {
+    font-family: "Fraunces", serif;
+    font-size: 36pt;
+    color: var(--accent);
+    line-height: 0.9;
+  }
+  .screen-name {
+    font-family: "Fraunces", serif;
+    font-size: 18pt;
+    color: var(--ink);
+    margin: 0 0 4px 0;
+  }
+  .pain-tag {
+    display: inline-block;
+    padding: 2px 6px;
+    border: 1px solid var(--at-risk);
+    color: var(--at-risk);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    border-radius: 2px;
+    margin-bottom: 6px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table th, table td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--hairline);
+    font-size: 10pt;
+  }
+  table th {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ink-muted);
+    font-weight: normal;
+    border-bottom: 1px solid var(--hairline-strong);
+  }
+  ul.tight {
+    margin: 0 0 0 0;
+    padding: 0 0 0 18px;
+  }
+  ul.tight li {
+    margin: 0 0 4px 0;
+    line-height: 1.45;
+  }
+  ul.editorial {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.editorial li {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 8px;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  ul.editorial li::before {
+    content: "∙";
+    color: var(--accent);
+    font-weight: bold;
+  }
+  .pull-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 6px 0;
+  }
+  .pull-stat .num {
+    font-family: "Fraunces", serif;
+    font-size: 36pt;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .pull-stat .num.ink { color: var(--ink); }
+  .pull-stat .label {
+    font-size: 10pt;
+    color: var(--ink-muted);
+  }
+  .footer-rule {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid var(--hairline);
+    color: var(--ink-faint);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    display: flex;
+    justify-content: space-between;
+  }
+  .timing-row {
+    display: grid;
+    grid-template-columns: 80px 32px 1fr;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--hairline);
+    align-items: start;
+  }
+  .timing-row .time {
+    font-family: "JetBrains Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-muted);
+    font-size: 10pt;
+  }
+  .timing-row .step {
+    font-family: "Fraunces", serif;
+    font-size: 14pt;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .timing-row .body {
+    line-height: 1.45;
+  }
+  .timing-row .body strong {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: 12pt;
+  }
+  .qa-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .qa-row .q {
+    color: var(--ink-muted);
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .qa-row .a {
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .stat-box {
+    border: 1px solid var(--hairline);
+    padding: 12px 14px;
+    border-radius: 2px;
+    background: var(--panel);
+  }
+  .stat-box .label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+  }
+  .stat-box .value {
+    font-family: "Fraunces", serif;
+    font-size: 20pt;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .stat-box .caption {
+    font-size: 9pt;
+    color: var(--ink-muted);
+    margin-top: 4px;
+    font-style: italic;
+    line-height: 1.4;
+  }
+  .do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .do-list, .dont-list {
+    border: 1px solid var(--hairline);
+    padding: 14px 16px;
+    border-radius: 2px;
+  }
+  .do-list { border-color: var(--on-time); }
+  .dont-list { border-color: var(--breach); }
+  .do-list .header { color: var(--on-time); }
+  .dont-list .header { color: var(--breach); }
+  .do-list .header, .dont-list .header {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    margin-bottom: 8px;
+  }
+</style>

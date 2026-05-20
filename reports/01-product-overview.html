@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Nordline Intelligence — Pain Points &amp; Screen Purpose</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  @page { size: A4; margin: 18mm 18mm 20mm 18mm; }
+  @page :first { margin: 0; }
+  :root {
+    --paper: #F7F4EE; --paper-soft: #EFEADD; --panel: #FFFFFF;
+    --hairline: #E5DFD2; --hairline-strong: #CFC7B5;
+    --ink: #1A1A1A; --ink-muted: #6B6557; --ink-faint: #9C9583;
+    --accent: #2E5E4E; --accent-soft: #D8E4DD;
+    --on-time: #2E5E4E; --at-risk: #C77B30; --breach: #A0322B;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "Inter", -apple-system, sans-serif;
+    font-size: 11pt; line-height: 1.5; -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01";
+  }
+  .serif { font-family: "Fraunces", serif; font-optical-sizing: auto; }
+  .mono { font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; }
+  .kicker {
+    font-family: "JetBrains Mono", monospace; font-size: 8.5pt;
+    text-transform: uppercase; letter-spacing: 0.22em; color: var(--ink-muted);
+  }
+  .kicker .dot { color: var(--accent); margin-right: 4px; }
+  h1.cover-title {
+    font-family: "Fraunces", serif; font-weight: 400;
+    font-size: 56pt; line-height: 0.96; letter-spacing: -0.018em;
+    margin: 0 0 18px 0; color: var(--ink);
+  }
+  h1.cover-title em { font-style: normal; color: var(--accent); }
+  h2 {
+    font-family: "Fraunces", serif; font-weight: 400;
+    font-size: 28pt; line-height: 1.05; letter-spacing: -0.012em;
+    margin: 0 0 14px 0; color: var(--ink);
+  }
+  h3 {
+    font-family: "Fraunces", serif; font-weight: 400;
+    font-size: 17pt; line-height: 1.15; margin: 0 0 8px 0; color: var(--ink);
+  }
+  h4 {
+    font-family: "Fraunces", serif; font-weight: 400;
+    font-size: 13pt; line-height: 1.2; margin: 0 0 4px 0; color: var(--ink);
+  }
+  p { margin: 0 0 10px 0; }
+  p.lede { font-size: 12pt; font-style: italic; color: var(--ink-muted); max-width: 56em; line-height: 1.55; }
+  hr.editorial { border: 0; height: 1px; background: var(--hairline-strong); margin: 22px 0; }
+  hr.hairline { border: 0; height: 1px; background: var(--hairline); margin: 14px 0; }
+  .page-break { page-break-before: always; }
+  .cover {
+    width: 100%; min-height: 100vh;
+    padding: 32mm 24mm;
+    background: var(--paper);
+    display: flex; flex-direction: column; justify-content: space-between;
+    page-break-after: always;
+  }
+  .pain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .pain-card {
+    border: 1px solid var(--hairline); background: var(--panel);
+    padding: 14px 16px; border-radius: 2px;
+  }
+  .pain-card .pain-no {
+    font-family: "Fraunces", serif; font-size: 26pt;
+    color: var(--accent); line-height: 1; margin-bottom: 6px;
+  }
+  .screen-block {
+    display: grid; grid-template-columns: 56px 1fr; gap: 18px;
+    padding: 16px 0; border-bottom: 1px solid var(--hairline);
+    page-break-inside: avoid;
+  }
+  .screen-block:last-child { border-bottom: 0; }
+  .screen-no {
+    font-family: "Fraunces", serif; font-size: 40pt;
+    color: var(--accent); line-height: 0.9;
+  }
+  .screen-name { font-family: "Fraunces", serif; font-size: 19pt; margin: 0 0 4px 0; }
+  .pain-tag {
+    display: inline-block; padding: 2px 6px;
+    border: 1px solid var(--at-risk); color: var(--at-risk);
+    font-family: "JetBrains Mono", monospace; font-size: 7.5pt;
+    text-transform: uppercase; letter-spacing: 0.22em;
+    border-radius: 2px; margin-bottom: 8px;
+  }
+  ul.tight { margin: 6px 0 0 0; padding: 0 0 0 18px; }
+  ul.tight li { margin: 0 0 4px 0; line-height: 1.45; }
+  ul.editorial { list-style: none; padding: 0; margin: 0; }
+  ul.editorial li {
+    display: grid; grid-template-columns: 14px 1fr; gap: 8px;
+    margin-bottom: 6px; line-height: 1.5;
+  }
+  ul.editorial li::before { content: "∙"; color: var(--accent); font-weight: bold; }
+  table { width: 100%; border-collapse: collapse; }
+  table th, table td {
+    text-align: left; padding: 8px 10px;
+    border-bottom: 1px solid var(--hairline); font-size: 10pt; vertical-align: top;
+  }
+  table th {
+    font-family: "JetBrains Mono", monospace; font-size: 8pt;
+    text-transform: uppercase; letter-spacing: 0.22em;
+    color: var(--ink-muted); font-weight: normal;
+    border-bottom: 1px solid var(--hairline-strong);
+  }
+  .footer-rule {
+    margin-top: 28px; padding-top: 10px;
+    border-top: 1px solid var(--hairline); color: var(--ink-faint);
+    font-family: "JetBrains Mono", monospace; font-size: 8pt;
+    text-transform: uppercase; letter-spacing: 0.22em;
+    display: flex; justify-content: space-between;
+  }
+  .pull-stat { display: flex; align-items: baseline; gap: 10px; margin: 8px 0; }
+  .pull-stat .num { font-family: "Fraunces", serif; font-size: 30pt; line-height: 1; color: var(--accent); }
+  .pull-stat .label { font-size: 10pt; color: var(--ink-muted); }
+  .two-col { display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: start; }
+  .badge-accent {
+    display: inline-block; border: 1px solid var(--accent);
+    color: var(--accent); padding: 3px 7px; border-radius: 2px;
+    font-family: "JetBrains Mono", monospace; font-size: 8pt;
+    text-transform: uppercase; letter-spacing: 0.22em;
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div>
+    <div class="kicker"><span class="dot">∙</span> Nordline Intelligence <span style="color:var(--ink-faint);">/</span> Product Overview · Issue No. 01</div>
+  </div>
+  <div>
+    <h1 class="cover-title">
+      Time-Critical<br/>
+      Spare-Parts Logistics,<br/>
+      <em>Built For The Night.</em>
+    </h1>
+    <p class="lede" style="max-width: 44em;">
+      A B2B SaaS control tower for in-night logistics across the Nordics, the Baltics and Poland. Predicts SLA risk before it breaches, pre-positions inventory before demand spikes, and reroutes around disruption in seconds — not phone calls.
+    </p>
+    <div style="margin-top: 22px;">
+      <span class="badge-accent">For DANX Carousel Group</span>
+      <span style="margin-left: 10px;" class="kicker">Prepared by CodeUpscale · Pre-Sales Brief</span>
+    </div>
+  </div>
+  <div>
+    <hr class="hairline" />
+    <div style="display:flex; justify-content: space-between; align-items: baseline; color: var(--ink-muted);">
+      <span class="kicker">Pages 02 — 12</span>
+      <span class="kicker">Confidential · Pre-Sales</span>
+    </div>
+  </div>
+</section>
+
+<!-- PART 1 — THE PAIN -->
+<section>
+  <div class="kicker"><span class="dot">∙</span> Part I</div>
+  <h2>What's broken in the night shift today.</h2>
+  <p class="lede">
+    Time-critical spare-parts logistics is a discipline that lives between 22:00 and 07:00 — the window that holds a hospital MRI, a factory line, a wind turbine, and a fleet of service vans together. When it goes well, no one notices. When it breaks, six different people get phone calls before anyone agrees on what happened.
+  </p>
+
+  <hr class="editorial" />
+
+  <div class="pain-grid">
+
+    <div class="pain-card">
+      <div class="pain-no">01</div>
+      <h4>No single command view across seven countries.</h4>
+      <p style="color: var(--ink-muted); font-size: 10pt;">
+        Dispatchers stitch together TMS, WMS, telematics and three weather feeds in browser tabs. When a customer asks <em>"where is my part?"</em> the answer lives in three different systems.
+      </p>
+    </div>
+
+    <div class="pain-card">
+      <div class="pain-no">02</div>
+      <h4>SLA breaches detected after they happen.</h4>
+      <p style="color: var(--ink-muted); font-size: 10pt;">
+        The first signal of a missed pre-07:00 window is usually the customer's call. By then the technician is on site, the part isn't, and the downtime clock is already running.
+      </p>
+    </div>
+
+    <div class="pain-card">
+      <div class="pain-no">03</div>
+      <h4>FSL stockouts cost the customer, not the carrier.</h4>
+      <p style="color: var(--ink-muted); font-size: 10pt;">
+        A brake-actuator shortage in Gothenburg costs Volvo Trucks €4.2k per hour of line-down time. A life-sciences part missing in Berlin costs €48k per hour. Stockouts are knowable 24–48h in advance — but no one looks until it's too late.
+      </p>
+    </div>
+
+    <div class="pain-card">
+      <div class="pain-no">04</div>
+      <h4>Disruption response is 90 minutes of phone calls.</h4>
+      <p style="color: var(--ink-muted); font-size: 10pt;">
+        E18 closes for three hours; 47 routes are affected; the dispatcher calls hubs, drivers and PUDO partners one at a time. Priority deliveries are kept on instinct, not policy.
+      </p>
+    </div>
+
+    <div class="pain-card">
+      <div class="pain-no">05</div>
+      <h4>Vertical rules live in spreadsheets.</h4>
+      <p style="color: var(--ink-muted); font-size: 10pt;">
+        Life-sciences cold-chain handling, auto line-down priority, agri rural drop windows — every vertical has its own SLA, every customer has their own override. None of it is encoded in software.
+      </p>
+    </div>
+
+    <div class="pain-card">
+      <div class="pain-no">06</div>
+      <h4>Customer reporting is a Thursday-night spreadsheet.</h4>
+      <p style="color: var(--ink-muted); font-size: 10pt;">
+        Account managers export from three systems, paste into a deck, and email it at 23:00 on Thursday. The numbers are 36 hours stale by the time the customer reads them.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="footer-rule">
+    <span><span class="dot" style="color: var(--accent);">∙</span> Nordline Intelligence · Product Overview</span>
+    <span>02</span>
+  </div>
+</section>
+
+<!-- PART 2 — THE SOLUTION POSITION -->
+<section class="page-break">
+  <div class="kicker"><span class="dot">∙</span> Part II</div>
+  <h2>One product, one operating layer.</h2>
+  <p class="lede">
+    Nordline Intelligence is the missing layer between TMS, WMS, telematics and the dispatcher's instinct. It listens to every system that already exists in your network, applies a single predictive model on top, and gives every role — dispatcher, hub manager, account lead, executive — the view they actually need.
+  </p>
+
+  <hr class="editorial" />
+
+  <div class="two-col">
+    <div>
+      <h3>Three things make this distinct from a TMS.</h3>
+      <ul class="editorial" style="margin-top: 12px;">
+        <li><strong>In-night model.</strong> SLA windows are <em>pre-07:00</em>. The customer is a field engineer, not a household. Every screen knows this.</li>
+        <li><strong>Spare parts as a cargo class.</strong> Small, high-value, high-criticality. One missed part is a hospital, a factory line, or a turbine offline.</li>
+        <li><strong>Vertical-aware.</strong> Auto, life sciences, renewables, agri, industrial — each with distinct SLA windows, downtime cost, and handling rules. Encoded, not improvised.</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color: var(--ink-muted); font-size: 11pt;">The economic argument</h4>
+      <div class="pull-stat"><span class="num">€127k</span><span class="label">downtime exposure avoided<br/>per week, anchor customer</span></div>
+      <div class="pull-stat"><span class="num">96.8%</span><span class="label">SLA hold rate vs. 96% renewal floor</span></div>
+      <div class="pull-stat"><span class="num">4s</span><span class="label">to recalculate 47 routes around a closure</span></div>
+      <div class="pull-stat"><span class="num">−18%</span><span class="label">failed-delivery cost, week over week</span></div>
+    </div>
+  </div>
+
+  <hr class="editorial" />
+
+  <h3>What the platform replaces.</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Today</th>
+        <th>With Nordline</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>3-4 dispatcher tabs (TMS, WMS, telematics, weather)</td>
+        <td>One control tower with country drill-down</td>
+      </tr>
+      <tr>
+        <td>Breach detection by customer phone call</td>
+        <td>Breach <em>prediction</em> 4–8 hours upstream</td>
+      </tr>
+      <tr>
+        <td>Stockout discovery on the day of shortage</td>
+        <td>34-hour stockout forecast with auto-replenishment plan</td>
+      </tr>
+      <tr>
+        <td>90-minute disruption phone-call cascade</td>
+        <td>4-second recalculation, priority shipments preserved</td>
+      </tr>
+      <tr>
+        <td>Three-person investigation: <em>"why is tonight risky?"</em></td>
+        <td>One sentence to the AI assistant, grounded in tonight's data</td>
+      </tr>
+      <tr>
+        <td>Thursday-night customer deck assembly</td>
+        <td>Auto-generated customer report, Friday 09:00 to inbox</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer-rule">
+    <span><span class="dot" style="color: var(--accent);">∙</span> Nordline Intelligence · Product Overview</span>
+    <span>03</span>
+  </div>
+</section>
+
+<!-- PART 3 — THE 7 SCREENS -->
+<section class="page-break">
+  <div class="kicker"><span class="dot">∙</span> Part III</div>
+  <h2>The seven screens.</h2>
+  <p class="lede">
+    Each screen answers a question a real role on the night-ops floor asks. Every one of the six pain points above is solved somewhere in this sequence.
+  </p>
+
+  <hr class="editorial" />
+
+  <div class="screen-block">
+    <div class="screen-no">01</div>
+    <div>
+      <div class="kicker">Control Tower · Hero Screen</div>
+      <h3 class="screen-name">The Night, At A Glance.</h3>
+      <div><span class="pain-tag">Solves Pain 01</span></div>
+      <p><strong>Who it's for:</strong> Dispatchers and hub managers, 22:00–07:00.</p>
+      <p><strong>Purpose:</strong> Show the entire seven-country network in one view — every shipment, hub, FSL, PUDO and active route — with the at-risk ones surfaced visibly. Country filter narrows the scope without breaking the story. Click any node, drill into pick rate, cross-dock queue and labor status without leaving the screen.</p>
+      <p style="color: var(--ink-muted); font-style: italic;">Replaces the 3-tab dispatcher workspace. The answer to <em>"where is everything right now?"</em> goes from four minutes to two seconds.</p>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-no">02</div>
+    <div>
+      <div class="kicker">SLA Risk Prediction</div>
+      <h3 class="screen-name">Predict, Then Prevent.</h3>
+      <div><span class="pain-tag">Solves Pain 02</span></div>
+      <p><strong>Who it's for:</strong> Dispatchers and account managers under SLA pressure.</p>
+      <p><strong>Purpose:</strong> Score every in-flight shipment 0–100 on breach probability, decompose the score into its six contributing factors (weather, hub backlog, driver availability, traffic, lane history, customer window), and recommend a concrete intervention that the dispatcher can accept in a single click.</p>
+      <p style="color: var(--ink-muted); font-style: italic;">Move from reactive (<em>"the customer called"</em>) to proactive (<em>"we acted three hours ago"</em>).</p>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-no">03</div>
+    <div>
+      <div class="kicker">Inventory Intelligence</div>
+      <h3 class="screen-name">Stage Tomorrow's Parts Tonight.</h3>
+      <div><span class="pain-tag">Solves Pain 03 &amp; 05</span></div>
+      <p><strong>Who it's for:</strong> FSL managers, supply planners, account leads.</p>
+      <p><strong>Purpose:</strong> Predict stockouts 24–48 hours in advance per SKU per FSL, recommend an overnight replenishment move (source hub, units, truck slot, arrival, cost), and switch SLA &amp; handling rules instantly by industry vertical (auto → life sciences → renewables → agri → industrial → materials → consumer). One pill click swaps the entire rule profile and refilters the SKU table.</p>
+      <p style="color: var(--ink-muted); font-style: italic;">A €312 truck move avoids €48k of customer downtime exposure. The math defends itself.</p>
+    </div>
+  </div>
+
+  <div class="footer-rule">
+    <span><span class="dot" style="color: var(--accent);">∙</span> Nordline Intelligence · Product Overview</span>
+    <span>04</span>
+  </div>
+</section>
+
+<section class="page-break">
+  <div class="screen-block">
+    <div class="screen-no">04</div>
+    <div>
+      <div class="kicker">In-Night Route Optimization</div>
+      <h3 class="screen-name">Five Hundred Routes. Four Seconds.</h3>
+      <div><span class="pain-tag">Solves Pain 04</span></div>
+      <p><strong>Who it's for:</strong> Dispatchers and operations directors facing live disruption.</p>
+      <p><strong>Purpose:</strong> Inject a real-world closure (E18 Stockholm–Oslo) and watch every affected route reweave around it without losing a single technician delivery. The before/after panel updates distance, CO₂, network cost and SLA preservation live; the per-route cards show which deliveries detoured and which kept their ETA. A Fleet &amp; Driver card shows utilisation, hours-of-service and cost per shipment shift with the disruption.</p>
+      <p style="color: var(--ink-muted); font-style: italic;">Replaces the 90-minute phone-call cascade with a four-second optimisation.</p>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-no">05</div>
+    <div>
+      <div class="kicker">AI Operations Assistant</div>
+      <h3 class="screen-name">Ask The Night.</h3>
+      <div><span class="pain-tag">Reduces friction across all pains</span></div>
+      <p><strong>Who it's for:</strong> Dispatchers, managers, and account leads who need an answer faster than a Slack message.</p>
+      <p><strong>Purpose:</strong> Replace the three-person investigation with one sentence. The assistant is grounded in tonight's shipments, route plans, weather feeds and ninety days of SLA history. Every answer comes with an evidence list, recommended actions, and a single <em>Apply All</em> control. Free-form questions route by topic; suggested prompts cover the four highest-value dispatcher questions.</p>
+      <p style="color: var(--ink-muted); font-style: italic;">The question your dispatcher used to phone three people to answer — now in a single sentence, with the action pre-staged.</p>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-no">06</div>
+    <div>
+      <div class="kicker">Customer Performance Report</div>
+      <h3 class="screen-name">A Quiet Week. By Design.</h3>
+      <div><span class="pain-tag">Solves Pain 06</span></div>
+      <p><strong>Who it's for:</strong> Account leads and the customer's own operations executives.</p>
+      <p><strong>Purpose:</strong> Auto-generate a publication-quality weekly performance report for each enterprise customer. Cover &amp; pull-stats, 12-week SLA trend against the renewal floor, exception breakdown by cause, cost-to-serve, notable saves, and a three-line analyst recommendation for next week. Exports to PDF, schedules to Friday 09:00 delivery, shares as a read-only portal link.</p>
+      <p style="color: var(--ink-muted); font-style: italic;">Account managers reclaim Thursday night. Customers see value before they ask for it.</p>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-no">07</div>
+    <div>
+      <div class="kicker">Integration &amp; Architecture</div>
+      <h3 class="screen-name">The Connectors Underneath.</h3>
+      <div><span class="pain-tag">Answers the IT question</span></div>
+      <p><strong>Who it's for:</strong> IT stakeholders, integration architects, the buyer's CIO.</p>
+      <p><strong>Purpose:</strong> Show that Nordline does not replace TMS, WMS or ERP — it sits on top of them as an event-driven operating layer. Eight live connectors (TMS, WMS, ERP, telematics, PUDO, POD, weather, traffic), an event-choreography trace showing one pick → five updates in under a second, and three cross-cutting capabilities (multi-country/multi-currency, audit-logged, role-based dashboards).</p>
+      <p style="color: var(--ink-muted); font-style: italic;">Answers the <em>"how does this fit our SAP and our existing TMS?"</em> question visually.</p>
+    </div>
+  </div>
+
+  <div class="footer-rule">
+    <span><span class="dot" style="color: var(--accent);">∙</span> Nordline Intelligence · Product Overview</span>
+    <span>05</span>
+  </div>
+</section>
+
+<!-- PART 4 — SCOPE & DATA -->
+<section class="page-break">
+  <div class="kicker"><span class="dot">∙</span> Part IV</div>
+  <h2>Scope at pilot.</h2>
+  <p class="lede">
+    Built to a deliberately realistic operational footprint so the demo never feels like a toy.
+  </p>
+
+  <hr class="editorial" />
+
+  <table>
+    <thead>
+      <tr><th>Operational Element</th><th>Pilot Scale</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Countries / regions</td><td>7 — Denmark, Sweden, Norway, Finland, Estonia, Latvia, Lithuania, Poland</td></tr>
+      <tr><td>Hubs</td><td>56 across all seven countries</td></tr>
+      <tr><td>Forward Stock Locations (FSL)</td><td>29 distributed by demand density</td></tr>
+      <tr><td>PUDO &amp; locker points</td><td>86 (urban + rural)</td></tr>
+      <tr><td>Active nightly routes</td><td>500</td></tr>
+      <tr><td>Annual shipment volume modeled</td><td>1.8M</td></tr>
+      <tr><td>Spare-parts SKUs</td><td>10,000 across 7 verticals</td></tr>
+      <tr><td>Customer accounts</td><td>250 (incl. Siemens Healthineers, Volvo Trucks, John Deere, Vestas, ABB)</td></tr>
+      <tr><td>SLA history horizon</td><td>12 months of tonight's-equivalent shipment + exception history</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="editorial" />
+
+  <h3>Industry verticals supported.</h3>
+  <table>
+    <thead>
+      <tr><th>Vertical</th><th>SLA Window</th><th>Downtime Cost / hr</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Life Sciences &amp; Medical</td><td>4h</td><td>€48,000</td></tr>
+      <tr><td>Renewable Energy</td><td>8h</td><td>€11,200</td></tr>
+      <tr><td>Industrial Machinery</td><td>6h</td><td>€9,500</td></tr>
+      <tr><td>Automotive Spare Parts</td><td>8h</td><td>€4,200</td></tr>
+      <tr><td>Materials Handling</td><td>10h</td><td>€2,400</td></tr>
+      <tr><td>Agriculture Equipment</td><td>12h</td><td>€1,800</td></tr>
+      <tr><td>Consumer Service Parts</td><td>14h</td><td>€600</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="editorial" />
+
+  <h3>How the 14 capability areas of the brief are covered.</h3>
+  <table>
+    <thead>
+      <tr><th>Capability</th><th>Screen</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1. Control Tower</td><td>01 (hero)</td></tr>
+      <tr><td>2. AI SLA Risk Prediction</td><td>02</td></tr>
+      <tr><td>3. In-Night Route Optimization</td><td>04</td></tr>
+      <tr><td>4. FSL / Hub / PUDO Inventory</td><td>03</td></tr>
+      <tr><td>5. Warehouse &amp; Cross-Dock Operations</td><td>01 — embedded in hub drawer</td></tr>
+      <tr><td>6. Time-Critical Exception Management</td><td>02 — risk queue doubles as exception queue</td></tr>
+      <tr><td>7. Customer &amp; Technician Portal</td><td>06 (customer view)</td></tr>
+      <tr><td>8. Industry-Specific Verticals</td><td>03 — pill row swaps rules live</td></tr>
+      <tr><td>9. Predictive Demand Planning</td><td>03 — 30-day forecast per SKU</td></tr>
+      <tr><td>10. Fleet, Driver &amp; Route Analytics</td><td>04 — Fleet &amp; Driver card</td></tr>
+      <tr><td>11. AI Operations Assistant</td><td>05</td></tr>
+      <tr><td>12. Reporting &amp; Executive Dashboards</td><td>06</td></tr>
+      <tr><td>13. Integration / Architecture</td><td>07</td></tr>
+      <tr><td>14. Pilot Sample Data</td><td>Powers all screens</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer-rule">
+    <span><span class="dot" style="color: var(--accent);">∙</span> Nordline Intelligence · Product Overview</span>
+    <span>06</span>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="page-break">
+  <div class="kicker"><span class="dot">∙</span> Closing</div>
+  <h2>Why this story works for DANX.</h2>
+
+  <p class="lede">
+    Three reasons this product fits the DANX network specifically, today.
+  </p>
+
+  <hr class="editorial" />
+
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 14px;">
+    <div>
+      <div class="kicker">∙ One</div>
+      <h4 style="margin-top: 8px;">The in-night model is the moat.</h4>
+      <p style="color: var(--ink-muted); font-size: 10.5pt;">
+        Every competitor sells a TMS or a WMS. None of them encode the pre-07:00 model, the technician-first sequencing, or the secure-drop and PUDO chain as first-class concepts. Nordline does, because it was built only for this.
+      </p>
+    </div>
+    <div>
+      <div class="kicker">∙ Two</div>
+      <h4 style="margin-top: 8px;">Predictive over reactive.</h4>
+      <p style="color: var(--ink-muted); font-size: 10.5pt;">
+        DANX customers don't care that you logged the breach. They care that the part arrived. Every screen in this product is biased toward the upstream intervention — the move that prevents the conversation.
+      </p>
+    </div>
+    <div>
+      <div class="kicker">∙ Three</div>
+      <h4 style="margin-top: 8px;">Vertical-aware out of the box.</h4>
+      <p style="color: var(--ink-muted); font-size: 10.5pt;">
+        Siemens cold chain. Vestas turbine downtime. John Deere harvest seasonality. Each lives as a profile, with its own SLA, its own escalation rules, its own report. The dispatcher doesn't need to remember which customer cares about what.
+      </p>
+    </div>
+  </div>
+
+  <hr class="editorial" />
+
+  <div class="two-col">
+    <div>
+      <h3>Recommended next step.</h3>
+      <p>
+        A four-week shaped pilot scoped to <strong>one Nordic country, one corridor, one anchor customer</strong>. We co-instrument the integration layer (TMS + WMS read-only) and stand up Screens 01, 02 and 03 against tonight's live data — enough to demonstrate breach prediction value within the pilot window.
+      </p>
+      <p>
+        Weeks 1–2: integration &amp; data shape · Weeks 3–4: shadow-mode operation with the night-ops team · Week 5: review &amp; renewal-or-roll.
+      </p>
+    </div>
+    <div>
+      <h4>Pilot success metrics</h4>
+      <ul class="editorial" style="margin-top: 8px;">
+        <li>Breach prediction lead time ≥ 3 hours (median)</li>
+        <li>SLA hold rate +0.5 percentage points vs. baseline</li>
+        <li>FSL stockout prevention &gt; 3 events in the pilot window</li>
+        <li>Dispatcher console-switching time −60% during ops shift</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="editorial" />
+
+  <div style="text-align: center; padding: 28px 0; color: var(--ink-muted);">
+    <span class="kicker"><span class="dot" style="color: var(--accent);">∙</span> Nordline Intelligence <span class="dot">∙</span></span>
+    <h3 class="serif" style="margin-top: 12px; font-size: 22pt;">Prepared by CodeUpscale for DANX Carousel Group</h3>
+    <p style="font-size: 10pt; font-style: italic; margin-top: 8px;">
+      Confidential pre-sales material · Issue No. 01, 2026
+    </p>
+  </div>
+
+  <div class="footer-rule">
+    <span><span class="dot" style="color: var(--accent);">∙</span> Nordline Intelligence · Product Overview</span>
+    <span>07</span>
+  </div>
+</section>
+
+</body>
+</html>

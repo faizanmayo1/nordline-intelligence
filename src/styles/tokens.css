@@ -1,0 +1,159 @@
+/* Nordline Intelligence — Scandinavian Editorial / Night-Ops design tokens */
+
+:root,
+[data-theme="day"] {
+  /* Surfaces */
+  --paper: #f7f4ee;
+  --paper-soft: #efeadd;
+  --panel: #ffffff;
+  --panel-soft: #faf7f0;
+  --hairline: #e5dfd2;
+  --hairline-strong: #cfc7b5;
+
+  /* Type */
+  --ink: #1a1a1a;
+  --ink-muted: #6b6557;
+  --ink-faint: #9c9583;
+  --ink-on-accent: #f7f4ee;
+
+  /* Brand + signals */
+  --accent: #2e5e4e; /* Nordic spruce */
+  --accent-soft: #d8e4dd;
+  --on-time: #2e5e4e;
+  --at-risk: #c77b30; /* amber-brick */
+  --breach: #a0322b; /* deep terracotta */
+  --info: #3a5a7c;
+
+  /* Vertical palette (for industry pills) */
+  --v-auto: #5a4a3b;
+  --v-agri: #6a7a3a;
+  --v-lifesci: #7a3a4a;
+  --v-industrial: #3a4a5a;
+  --v-renew: #2e5e4e;
+  --v-materials: #806a45;
+  --v-consumer: #4a3a6a;
+
+  /* Map theming */
+  --map-bg: #eee7d6;
+  --map-water: #d8d6c8;
+  --map-border: #b8af9c;
+
+  color-scheme: light;
+}
+
+[data-theme="night"] {
+  --paper: #0e1014;
+  --paper-soft: #14161c;
+  --panel: #161a21;
+  --panel-soft: #1c2029;
+  --hairline: #262b35;
+  --hairline-strong: #353c49;
+
+  --ink: #f2efe9;
+  --ink-muted: #8a8d95;
+  --ink-faint: #595d66;
+  --ink-on-accent: #0e1014;
+
+  --accent: #5ee9a6; /* aurora green */
+  --accent-soft: #1f2e26;
+  --on-time: #5ee9a6;
+  --at-risk: #f2b36b;
+  --breach: #ff7a6a;
+  --info: #6aa5e0;
+
+  --v-auto: #c9b08c;
+  --v-agri: #b8c468;
+  --v-lifesci: #e891a4;
+  --v-industrial: #8aa8c8;
+  --v-renew: #5ee9a6;
+  --v-materials: #d4a978;
+  --v-consumer: #b698d8;
+
+  --map-bg: #0d1318;
+  --map-water: #0a0e12;
+  --map-border: #2a3340;
+
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 250ms ease, color 250ms ease;
+}
+
+.font-serif {
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-feature-settings: "ss01";
+  font-optical-sizing: auto;
+}
+
+.font-mono {
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Editorial rule */
+.hr-editorial {
+  height: 1px;
+  background: var(--hairline);
+  border: 0;
+  margin: 0;
+}
+.hr-editorial-strong {
+  height: 1px;
+  background: var(--hairline-strong);
+  border: 0;
+  margin: 0;
+}
+
+/* Subtle scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--hairline-strong);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Pulse for at-risk indicators */
+@keyframes nordline-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.18);
+  }
+}
+.pulse-risk {
+  animation: nordline-pulse 1.8s ease-in-out infinite;
+}
+
+/* MapLibre overrides matched to theme */
+.maplibregl-ctrl-attrib,
+.maplibregl-ctrl-attrib a {
+  background: transparent !important;
+  color: var(--ink-faint) !important;
+  font-size: 9px !important;
+}
+.maplibregl-ctrl-attrib-button {
+  display: none !important;
+}

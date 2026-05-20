@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  /* Mirror CSS variables so Tailwind utilities can reference tokens */
+  --color-paper: var(--paper);
+  --color-paper-soft: var(--paper-soft);
+  --color-panel: var(--panel);
+  --color-panel-soft: var(--panel-soft);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-ink-on-accent: var(--ink-on-accent);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-time: var(--on-time);
+  --color-at-risk: var(--at-risk);
+  --color-breach: var(--breach);
+  --color-info: var(--info);
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Fraunces", "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}

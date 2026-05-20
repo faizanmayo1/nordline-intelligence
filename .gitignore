@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+coverage
+*.log
+*.tsbuildinfo
+*.env
+.DS_Store
+.idea
+.vscode
+*.suo
+config.bat
